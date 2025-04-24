@@ -1,21 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
+import Login from "./screens/LoginScreen"
+import SignUp from "./screens/SignupScreen";
+import MainApp from "./MainTabs"; // Bottom Tabs after login
+import { createNativeStackNavigator } from "@react-navigation/native-stack"; // Change this
+const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+
+    return unsubscribe; // Cleanup listener
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Open</Text>
-      <Text>Open up App.js to start working!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {user ? (
+       <Stack.Screen name="MainApp" component={MainApp} options={{ headerShown: false }} />
+
+        ) : (
+          <>
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+          </>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
