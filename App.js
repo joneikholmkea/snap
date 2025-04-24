@@ -5,7 +5,7 @@ import { auth } from "./firebase";
 import Login from "./screens/LoginScreen"
 import SignUp from "./screens/SignupScreen";
 import MainApp from "./MainTabs"; // Bottom Tabs after login
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from "@react-navigation/native-stack"; // Change this
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -27,7 +27,7 @@ export default function App() {
 
         ) : (
           <>
-  
+            <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="SignUp" component={SignUp} />
           </>
         )}

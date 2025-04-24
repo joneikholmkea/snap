@@ -9,7 +9,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { styles } from "../style";
 
-export default function SignUp() {
+export default function SignUp({navigation}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
  
@@ -49,6 +49,12 @@ export default function SignUp() {
       <Pressable style={styles.buttonStyleSignUp} onPress={handleSignUp}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </Pressable>
+      <Pressable onPress={() => navigation.navigate("Login")}>
+  <Text style={{ color: "#000", textAlign: "center", marginTop: 20 }}>
+    Already have an account? Log in
+  </Text>
+</Pressable>
+
     </View>
   );
 }

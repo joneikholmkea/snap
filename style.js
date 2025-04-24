@@ -23,8 +23,15 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: "#000",
   },
+  buttonStyleLogin: {
+    backgroundColor: "red", 
+    paddingVertical: 15,
+    borderRadius: 12,
+    alignItems: "center",
+    marginTop: 10,
+  },
   buttonStyleSignUp: {
-    backgroundColor: "#31adeb", // Black button
+    backgroundColor: "#31adeb", 
     paddingVertical: 15,
     borderRadius: 12,
     alignItems: "center",
@@ -46,3 +53,5 @@ export const styles = StyleSheet.create({
     fontWeight: "600",
   },
 });
+
+
